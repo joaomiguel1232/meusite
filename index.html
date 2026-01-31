@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Criador de Site</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+input, textarea, button{
+    width:80%;
+    max-width:500px;
+    margin:8px;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+}
+
+textarea{
+    height:200px;
+}
+
+button{
+    background:limegreen;
+    cursor:pointer;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌐 CriadorDeSite</h1>
+
+<p>Digite o nome do site:</p>
+<input id="nome" placeholder="seunomeaqui">
+
+<p>Cole seu HTML:</p>
+<textarea id="codigo" placeholder="Cole seu HTML aqui..."></textarea>
+
+<br>
+
+<button onclick="criar()">Criar Site</button>
+
+<h3 id="link"></h3>
+
+<script>
+function criar(){
+
+    let nome = document.getElementById("nome").value.trim();
+    let codigo = document.getElementById("codigo").value;
+
+    if(nome == "" || codigo == ""){
+        alert("Preencha tudo!");
+        return;
+    }
+
+    // Abre nova aba
+    let aba = window.open();
+
+    // Muda o "endereço" fake
+    aba.history.replaceState(null, null, "criadordesite/" + nome);
+
+    // Escreve o HTML
+    aba.document.open();
+    aba.document.write(codigo);
+    aba.document.close();
+
+    // Mostra o link
+    document.getElementById("link").innerHTML =
+    "✅ Seu site: criadordesite/" + nome;
+}
+</script>
+
+</body>
+</html>
